@@ -1,0 +1,145 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-satoshi), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --color-signal: var(--signal);
+  --color-signal-foreground: var(--signal-foreground);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.4);
+}
+
+:root {
+  --radius: 0.9rem;
+
+  /* Editorial teal — sophisticated light UI */
+  --background: #fafaf7;
+  --foreground: #0b1220;
+  --card: #ffffff;
+  --card-foreground: #0b1220;
+  --popover: #ffffff;
+  --popover-foreground: #0b1220;
+
+  --primary: #0e7c66;
+  --primary-foreground: #f4fdfa;
+  --secondary: #eef2f0;
+  --secondary-foreground: #0b1220;
+  --muted: #f1f0ea;
+  --muted-foreground: #5b6470;
+  --accent: #e6f3ef;
+  --accent-foreground: #0a4a3d;
+
+  --signal: #1f5fff;
+  --signal-foreground: #f5f8ff;
+
+  --destructive: #d6482f;
+  --border: #e7e5dd;
+  --input: #e7e5dd;
+  --ring: #0e7c66;
+}
+
+.dark {
+  --background: #0a0f14;
+  --foreground: #f3f4f0;
+  --card: #11171e;
+  --card-foreground: #f3f4f0;
+  --popover: #11171e;
+  --popover-foreground: #f3f4f0;
+  --primary: #23c39e;
+  --primary-foreground: #05130f;
+  --secondary: #1a222b;
+  --secondary-foreground: #f3f4f0;
+  --muted: #1a222b;
+  --muted-foreground: #9aa4b0;
+  --accent: #12261f;
+  --accent-foreground: #7defce;
+  --signal: #6b93ff;
+  --signal-foreground: #05101f;
+  --destructive: #f06449;
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 14%);
+  --ring: #23c39e;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "ss01", "cv01";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  html {
+    @apply font-sans;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    letter-spacing: -0.02em;
+  }
+}
+
+@layer utilities {
+  .font-heading {
+    font-family: var(--font-heading);
+  }
+  /* Subtle paper grain for premium depth */
+  .grain {
+    position: relative;
+  }
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+  @keyframes pf-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  .animate-float {
+    animation: pf-float 6s ease-in-out infinite;
+  }
+  @keyframes pf-pulse-glow {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 0.9; }
+  }
+  .animate-glow {
+    animation: pf-pulse-glow 7s ease-in-out infinite;
+  }
+}
